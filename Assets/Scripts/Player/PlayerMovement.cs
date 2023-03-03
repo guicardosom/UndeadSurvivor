@@ -8,18 +8,17 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
     private Vector2 movement;
 
-    // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         getPlayerInput();
     }
 
+    //moving player in FixedUpdate because it handles physics better
     void FixedUpdate()
     {
         movePlayer();
