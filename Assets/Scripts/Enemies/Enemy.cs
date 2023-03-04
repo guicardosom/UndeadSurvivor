@@ -9,20 +9,20 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private float walkSpeed;
-    [SerializeField] private SpriteRenderer sprite;
+    private SpriteRenderer sprite;
 
     void Start()
     {
-       
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        Move();
+        MoveTowardsTarget();
         FlipSprite();
     }
 
-    void Move()
+    void MoveTowardsTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, walkSpeed/10000);
     }
