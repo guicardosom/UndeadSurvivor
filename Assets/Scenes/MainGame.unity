@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHand: {fileID: 1456536149}
+  cam: {fileID: 519420031}
   moveSpeed: 5
 --- !u!50 &14283782
 Rigidbody2D:
