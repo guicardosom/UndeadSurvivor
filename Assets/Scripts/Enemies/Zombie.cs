@@ -35,7 +35,6 @@ public class Zombie : BaseEnemy
                 // Clips the health to the max
                 health = Mathf.Min(health + heathRegenerationPoints, maxHealth);
 
-                Debug.Log(health);
                 return;
             }
         }

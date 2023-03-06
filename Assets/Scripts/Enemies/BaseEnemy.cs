@@ -10,6 +10,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] protected float walkSpeed;
     [SerializeField] protected float baseHealthLevelMultiplier;
     [SerializeField] protected float health;
+    [SerializeField] protected float attackPoints;
     [SerializeField] protected float level = 1;
 
     static protected Transform target; // Idea: Decoy or clone or something that changes the target temporarily
@@ -25,11 +26,11 @@ public class BaseEnemy : MonoBehaviour
 
     public virtual void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        if(target == null)
+            target = GameObject.FindGameObjectWithTag("Player").transform;
     }
    
     #region Virtual Methods
-    
     public virtual void Update()
     {
         LookAtTarget();
@@ -44,6 +45,11 @@ public class BaseEnemy : MonoBehaviour
     public virtual void TakeDamage(float damage) // In the future we can implement Damage obj that has types where some enemies might be imune to
     {
         health = health - damage;
+    }
+
+    public virtual float Attack()
+    {
+        return attackPoints;
     }
     #endregion
 
