@@ -4,35 +4,37 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] GameObject rightHand;
+    [SerializeField] GameObject hand;
     [SerializeField] private float moveSpeed = 5f;
 
     private Rigidbody2D body;
-    private SpriteRenderer sprite;
+    private SpriteRenderer playerSprite;
+    private SpriteRenderer handSprite;
 
     private Vector2 movement;
-    private Vector2 mousePos;
 
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
+        playerSprite = GetComponent<SpriteRenderer>();
+        handSprite = hand.GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         GetPlayerInput();
         GetMousePosition();
-        RotateTowardsCursor();
+        RotateHandTowardsCursor();
         FlipSprite();
     }
 
-    //moving player in FixedUpdate because it handles physics better
-    void FixedUpdate()
+    void FixedUpdate() //moving player in FixedUpdate because it handles physics better
     {
         MovePlayer();
     }
+
+    #region Player Movement
 
     void GetPlayerInput()
     {
@@ -46,34 +48,42 @@ public class PlayerMovement : MonoBehaviour
         body.MovePosition(body.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
-    void GetMousePosition()
+    #endregion
+
+    #region Aim Rotation
+
+    Vector2 GetMousePosition()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    void RotateTowardsCursor()
+    void RotateHandTowardsCursor()
     {
         //rotate hand to follow mouse position
-        Vector2 lookDirection = mousePos - body.position;
+        Vector2 lookDirection = GetMousePosition() - body.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        rightHand.transform.rotation = Quaternion.Euler(0, 0, angle);
+        hand.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    #endregion
+
+    #region Flip Sprite
 
     void FlipSprite()
     {
         //flip hand and player's sprites according to direction of movement
-        SpriteRenderer handSprite = rightHand.GetComponent<SpriteRenderer>();
-
         if (movement.x == -1)
         {
-            sprite.flipX = true;
+            playerSprite.flipX = true;
             handSprite.flipX = true;
         }
 
         if (movement.x == 1)
         {
-            sprite.flipX = false;
+            playerSprite.flipX = false;
             handSprite.flipX = false;
         }
     }
+
+    #endregion
 }
