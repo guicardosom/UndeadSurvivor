@@ -72,9 +72,9 @@ public class BaseEnemy : MonoBehaviour
     #endregion
 
     #region Events
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if(col.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player"))
         {
             playerTakeDamage.TriggerEvent(Attack());
         }

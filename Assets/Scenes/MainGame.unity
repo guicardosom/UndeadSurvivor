@@ -238,7 +238,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &332264300
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -542,6 +542,10 @@ PrefabInstance:
     - target: {fileID: 1532524992975121329, guid: 583af098f5a32ea4595d739aad3ebd4c, type: 3}
       propertyPath: m_Name
       value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147847500360481424, guid: 583af098f5a32ea4595d739aad3ebd4c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 583af098f5a32ea4595d739aad3ebd4c, type: 3}
