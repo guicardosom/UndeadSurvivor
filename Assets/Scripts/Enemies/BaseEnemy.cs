@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
+using UnityEngine.Events;
+using static UnityEditor.Profiling.RawFrameDataView;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -12,44 +11,51 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] protected float health;
     [SerializeField] protected float attackPoints;
     [SerializeField] protected float level = 1;
+    [SerializeField] protected float attackRange;
 
-    static protected Transform target; // Idea: Decoy or clone or something that changes the target temporarily
+    protected static Transform target; 
     protected SpriteRenderer sprite;
     protected Animator animator;
+    
+    public GameEvent playerTakeDamage;
 
     public virtual void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        health = ((baseHealthLevelMultiplier * health) * level) ; // level allows us to recycle and increase difficulty, we can adjust this formula as needed when balancing
+        health = ((baseHealthLevelMultiplier * health) * level);
     }
 
     public virtual void Start()
     {
         if(target == null)
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            target = GameObject.FindGameObjectWithTag("Player").transform;       
     }
    
     #region Virtual Methods
     public virtual void Update()
     {
         LookAtTarget();
-        MoveTowardsTarget();
+       
+        if (!IsInAttackRange())
+        {
+            MoveTowardsTarget();
+        }
+    }
+
+    public virtual void TakeDamage(float damage) // In the future we can implement Damage obj that has types where some enemies might be imune to
+    {
+        health -= damage;
+    }
+    
+    public virtual float Attack()
+    {
+        return attackPoints;
     }
 
     protected virtual void MoveTowardsTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, walkSpeed / 10000);
-    }
-
-    public virtual void TakeDamage(float damage) // In the future we can implement Damage obj that has types where some enemies might be imune to
-    {
-        health = health - damage;
-    }
-
-    public virtual float Attack()
-    {
-        return attackPoints;
     }
     #endregion
 
@@ -57,6 +63,21 @@ public class BaseEnemy : MonoBehaviour
     private void LookAtTarget()
     {
         sprite.flipX = (transform.position.x - target.position.x > 0);
+    }
+
+    protected bool IsInAttackRange()
+    {
+        return Vector3.Distance(transform.position, target.transform.position) < attackRange;
+    }
+    #endregion
+
+    #region Events
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.CompareTag("Player"))
+        {
+            playerTakeDamage.TriggerEvent(Attack());
+        }
     }
     #endregion
 }
