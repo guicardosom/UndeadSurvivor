@@ -17,7 +17,7 @@ public class BaseEnemy : MonoBehaviour
     protected SpriteRenderer sprite;
     protected Animator animator;
     
-    public GameEvent playerTakeDamage;
+    public static DamageEvent playerTakeDamage;
 
     public virtual void Awake()
     {
@@ -43,14 +43,14 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(float damage) // In the future we can implement Damage obj that has types where some enemies might be imune to
+    public virtual void TakeDamage(Damage damage) // In the future we can implement Damage obj that has types where some enemies might be imune to
     {
-        health -= damage;
+        health -= damage.value;
     }
     
-    public virtual float Attack()
+    public virtual Damage Attack()
     {
-        return attackPoints;
+        return new Damage(attackPoints, DamageType.Magical);
     }
 
     protected virtual void MoveTowardsTarget()

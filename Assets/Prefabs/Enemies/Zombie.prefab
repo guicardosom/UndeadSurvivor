@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1532524992975121295}
   - component: {fileID: 1532524992975121294}
   - component: {fileID: 2147847500360481424}
+  - component: {fileID: 2535823076042951096}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -127,7 +128,6 @@ MonoBehaviour:
   attackPoints: 25
   level: 1
   attackRange: 0
-  playerTakeDamage: {fileID: 11400000, guid: 0246e38e44410d74da82ca4e2388bc28, type: 2}
   heathRegenerationPoints: 2
   regenerationTick: 3
 --- !u!70 &2147847500360481424
@@ -146,6 +146,34 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0047631264, y: -0.011113524}
   m_Size: {x: 0.5586319, y: 0.7872541}
   m_Direction: 0
+--- !u!114 &2535823076042951096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532524992975121329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f0729fc1cc59849ba2af81dfa190f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 851b08fd06162b946b96e1749d5dee9e, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1532524992975121294}
+        m_TargetAssemblyTypeName: BaseEnemy, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1532524994490665033
 GameObject:
   m_ObjectHideFlags: 0
