@@ -9,7 +9,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] protected float walkSpeed;
     [SerializeField] protected float baseHealthLevelMultiplier;
     [SerializeField] protected float health;
-    [SerializeField] protected float attackPoints;
+    [SerializeField] protected Damage damageData;
     [SerializeField] protected float level = 1;
     [SerializeField] protected float attackRange;
 
@@ -50,7 +50,7 @@ public class BaseEnemy : MonoBehaviour
     
     public virtual Damage Attack()
     {
-        return new Damage(attackPoints, DamageType.Magical);
+        return new Damage(damageData.value, damageData.type);
     }
 
     protected virtual void MoveTowardsTarget()
