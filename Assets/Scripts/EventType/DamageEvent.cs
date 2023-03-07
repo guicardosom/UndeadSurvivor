@@ -3,9 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game Event")]
 public class DamageEvent : ScriptableObject
 {
-    // When we go further into damage types re-write this event system to receive that and change it's name to be specific to it
-
     private List<DamageEventListener> listeners = new List<DamageEventListener>();
+
     public void TriggerEvent(Damage value)
     {
         for (int i = listeners.Count - 1; i >= 0; i--)
@@ -13,10 +12,12 @@ public class DamageEvent : ScriptableObject
             listeners[i].OnEventTriggered(value);
         }
     }
+
     public void AddListener(DamageEventListener listener)
     {
         listeners.Add(listener);
     }
+
     public void RemoveListener(DamageEventListener listener)
     {
         listeners.Remove(listener);

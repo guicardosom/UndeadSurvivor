@@ -128,6 +128,7 @@ MonoBehaviour:
   attackPoints: 25
   level: 1
   attackRange: 0
+  playerTakeDamage: {fileID: 11400000, guid: 0246e38e44410d74da82ca4e2388bc28, type: 2}
   heathRegenerationPoints: 2
   regenerationTick: 3
 --- !u!70 &2147847500360481424

@@ -17,7 +17,7 @@ public class BaseEnemy : MonoBehaviour
     protected SpriteRenderer sprite;
     protected Animator animator;
     
-    public static DamageEvent playerTakeDamage;
+    public DamageEvent playerTakeDamage;
 
     public virtual void Awake()
     {
@@ -29,7 +29,7 @@ public class BaseEnemy : MonoBehaviour
     public virtual void Start()
     {
         if(target == null)
-            target = GameObject.FindGameObjectWithTag("Player").transform;       
+            target = GameObject.FindGameObjectWithTag("Player").transform;      
     }
    
     #region Virtual Methods
