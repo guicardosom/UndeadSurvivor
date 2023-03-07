@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GetPlayerInput();
-        MovementDirection();
+        FlipByDirection();
     }
 
     void FixedUpdate() //moving player in FixedUpdate because it handles physics better
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    void MovementDirection()
+    void FlipByDirection()
     {
         if ((movement.x == -1 && facingRight) ||
             (movement.x == 1 && !facingRight))
