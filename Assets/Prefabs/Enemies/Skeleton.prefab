@@ -120,11 +120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27670d2007054364580fcaefba5f4b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   walkSpeed: 15
   baseHealthLevelMultiplier: 1.5
   health: 100
+  attackPoints: 0
   level: 1
+  attackRange: 0
+  playerTakeDamage: {fileID: 11400000, guid: 0246e38e44410d74da82ca4e2388bc28, type: 2}
   followStopDistance: 5
 --- !u!1 &5144763176132576465
 GameObject:
