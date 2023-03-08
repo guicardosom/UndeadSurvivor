@@ -12,6 +12,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] protected float attackPoints;
     [SerializeField] protected float level = 1;
     [SerializeField] protected float attackRange;
+    [SerializeField] protected float experienceValue;
 
     protected static Transform target; 
     protected SpriteRenderer sprite;

@@ -3,21 +3,39 @@ using System.Collections.Generic;
 using System.Xml.Schema;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private float level;
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
     [SerializeField, Range(0.0f, 0.9f)] private float physicalResistance;
     //[SerializeField, Range(0.0f, 0.9f)] private float magicResistance;
     //[SerializeField, Range(0.0f, 0.9f)] private float poisonResistance;
+    
+    public GameVariables gameVariables;
+    
+    private float experience;
+    private float experienceToNextLevel;
+    private int level;
 
-    private void Start()
+    #region Private Methods
+    private void Awake()
     {
         maxHealth = health;
     }
 
+    private void IncreaseLevel()
+    {
+        level++;
+        gameVariables.IncreaveLevel();
+
+        // Scale and modify Stats as we see fit when level up;
+        experienceToNextLevel += (experienceToNextLevel*level/10); // TODO: Come up with a better increase than this
+    }
+
+    #endregion
+    #region Public Methods
     public void AddHealth(float health)
     {
        this.health = Mathf.Min(this.health + health, maxHealth);
@@ -50,4 +68,16 @@ public class PlayerStats : MonoBehaviour
 
         health -= damage.value - (damage.value * physicalResistance);
     }
+
+    public void IncreaseExperience(float exp) // to be called everytime an enemy dies
+    {
+        experience += exp;
+
+        if (experience >= experienceToNextLevel)
+        {
+            experience = experienceToNextLevel - experience;
+            IncreaseLevel();
+        }
+    }
+    #endregion
 }
