@@ -10,8 +10,8 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] protected float baseHealthLevelMultiplier;
     [SerializeField] protected float health;
     [SerializeField] protected Damage damageData;
-    [SerializeField] protected float level = 1;
     [SerializeField] protected float attackRange;
+    [SerializeField] protected int level = 1;
 
     protected static Transform target; 
     protected SpriteRenderer sprite;

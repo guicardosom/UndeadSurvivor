@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   health: 50
-  maxHealth: 150
+  maxHealth: 100
   physicalResistance: 0
 --- !u!70 &14283784
 CapsuleCollider2D:
@@ -192,12 +192,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 332264301}
-  - component: {fileID: 14283783}
   - component: {fileID: 14283784}
-  - component: {fileID: 14283785}
   - component: {fileID: 332264300}
   - component: {fileID: 332264299}
+  - component: {fileID: 14283783}
   - component: {fileID: 332264298}
+  - component: {fileID: 14283785}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  lastMoveDirection: {x: 0, y: 0}
 --- !u!50 &332264299
 Rigidbody2D:
   serializedVersion: 4
@@ -304,6 +305,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 843230089}
+  - {fileID: 473648092}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -391,6 +393,60 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &473648091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 473648092}
+  - component: {fileID: 473648093}
+  m_Layer: 0
+  m_Name: ScytheController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &473648092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473648091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 332264301}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &473648093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473648091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721e27e3fb7b64004a4b742ef57d2b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6765071378857541379, guid: a19ad7c697bf74af8b10a9b5a28b2cb1, type: 3}
+  DamageData:
+    type: 0
+    value: 0
+  ProjectilesAmount: 0
+  <AttackSpeed>k__BackingField: 10
+  CycleDuration: 0
+  Cooldown: 3
+  Area: 0
+  Level: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +594,10 @@ PrefabInstance:
     - target: {fileID: 1532524992975121293, guid: 583af098f5a32ea4595d739aad3ebd4c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532524992975121294, guid: 583af098f5a32ea4595d739aad3ebd4c, type: 3}
+      propertyPath: damageData.value
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1532524992975121329, guid: 583af098f5a32ea4595d739aad3ebd4c, type: 3}
       propertyPath: m_Name
@@ -17419,7 +17479,9 @@ MonoBehaviour:
   walkSpeed: 15
   baseHealthLevelMultiplier: 0
   health: 0
-  attackPoints: 0
-  level: 1
+  damageData:
+    type: 0
+    value: 0
   attackRange: 0
+  level: 1
   playerTakeDamage: {fileID: 0}
