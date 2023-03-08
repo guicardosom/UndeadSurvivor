@@ -48,7 +48,7 @@ public class BaseEnemy : MonoBehaviour
         health -= damage.value;
     }
     
-    public virtual Damage Attack()
+    public virtual Damage DealDamage()
     {
         return new Damage(damageData.value, damageData.type);
     }
@@ -76,7 +76,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            playerTakeDamage.TriggerEvent(Attack());
+            playerTakeDamage.TriggerEvent(DealDamage());
         }
     }
     #endregion

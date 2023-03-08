@@ -15,9 +15,11 @@ public class BaseWeapon : MonoBehaviour
     [SerializeField] protected float Area;
     [SerializeField] protected int Level = 1;
 
-    protected PlayerMovement pm;
+    [SerializeField] private DamageEvent enemyTakeDamage;
+    public static PlayerMovement pm { get; private set; }
     protected SpriteRenderer sprite;
-    protected float currentCooldown;
+
+    private float currentCooldown;
 
     protected virtual void Awake()
     {
@@ -35,16 +37,36 @@ public class BaseWeapon : MonoBehaviour
         AttackAfterCooldown();
     }
 
-    protected virtual Damage Attack()
+    #region Attack
+    protected virtual void Attack()
     {
-        currentCooldown = Cooldown;
-        return new Damage(DamageData.value, DamageData.type);
+        GameObject spawnedWeapon = Instantiate(prefab);
+        spawnedWeapon.transform.position = transform.position;
     }
 
     private void AttackAfterCooldown()
     {
         currentCooldown -= Time.deltaTime;
         if (currentCooldown <= 0f)
+        {
             Attack();
+            currentCooldown = Cooldown;
+        }
     }
+
+    protected virtual Damage DealDamage()
+    {
+        return new Damage(DamageData.value, DamageData.type);
+    }
+    #endregion
+
+    #region Events
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            enemyTakeDamage.TriggerEvent(DealDamage());
+        }
+    }
+    #endregion
 }
