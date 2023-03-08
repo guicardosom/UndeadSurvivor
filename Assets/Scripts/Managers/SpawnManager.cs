@@ -8,10 +8,14 @@ using static UnityEngine.UI.CanvasScaler;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] public GameObject PlayerPrefab;
+
     public static SpawnManager Instance { get; private set; }
     public GameVariables GameVariables;
+    public int NumberOfEnemiesPerWave;
+    public GameObject Player { get; private set; }
 
-    [SerializeField] public int numberOfEnemiesPerWave;
+    private List<BaseEnemy> wave;
 
     void Awake()
     {
@@ -25,7 +29,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private List<BaseEnemy> wave;
 
     void Update()
     {
@@ -33,16 +36,17 @@ public class SpawnManager : MonoBehaviour
         if(wave.Count == 0)
         {
             GameVariables.IncreaseWave();
-            SpawnEnemies();
+            SpawnEnemies(WaveEnemyType.Zombie);
         }
     }
 
     public void SpawnWaves()
     {
-        SpawnEnemies(WaveEnemyTypes.Zombie);
+        
+
     }
 
-    public void SpawnEnemies(WaveEnemyTypes type)
+    public void SpawnEnemies(WaveEnemyType type)
     {
         // Select randomly between a few types of waves
         // Enemies strenght is not related to Player Level but the number of waves
@@ -52,7 +56,7 @@ public class SpawnManager : MonoBehaviour
         
         switch (type)
         {
-            case WaveEnemyTypes.Zombie:
+            case WaveEnemyType.Zombie:
                 enemy = new Zombie();
                 break;
             default:
@@ -60,7 +64,7 @@ public class SpawnManager : MonoBehaviour
         }
 
 
-        for (int i = 0; i < numberOfEnemiesPerWave; i++)
+        for (int i = 0; i < NumberOfEnemiesPerWave; i++)
         {
             //SPawn the above type;enemy
             //wave.Add(enemy);
@@ -69,12 +73,17 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
+        Player = Instantiate(PlayerPrefab);
+    }
 
+    public void OnLevelUp()
+    {
+        NumberOfEnemiesPerWave += GameVariables.PlayerLevel * 10;
     }
 }
 
 
-public enum WaveEnemyTypes
+public enum WaveEnemyType
 {
     Skeleton = 0,
     SkeletonBoss = 1,

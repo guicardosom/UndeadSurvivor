@@ -22,7 +22,15 @@ public class PlayerStats : MonoBehaviour
     #region Private Methods
     private void Awake()
     {
+        experienceToNextLevel = 100;
+        experience = 0;
+        level = 1;
         maxHealth = health;
+    }
+
+    private void Start()
+    {
+
     }
 
     private void IncreaseLevel()
@@ -69,7 +77,7 @@ public class PlayerStats : MonoBehaviour
         health -= damage.value - (damage.value * physicalResistance);
     }
 
-    public void IncreaseExperience(float exp) // to be called everytime an enemy dies
+    public void IncreaseExperience(float exp) // to be called everytime we pickup XP gems
     {
         experience += exp;
 
