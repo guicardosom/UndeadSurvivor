@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -4766820781622547894}
   - component: {fileID: 8517066736745758203}
   - component: {fileID: 913735516719153657}
+  - component: {fileID: 8978838713982225659}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -87,3 +88,31 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 3807186937991170844, guid: b51aa3eb6c4dd81458653f7e1caaffea, type: 3}
   GameVariables: {fileID: 11400000, guid: e9db0c2ff40e32747821966359143fbd, type: 2}
   NumberOfEnemiesPerWave: 10
+--- !u!114 &8978838713982225659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327864174246295752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52df5053ec2e24c47a2544a6723224a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 2c09d2b29b5f6564887c9040952e548c, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 913735516719153657}
+        m_TargetAssemblyTypeName: SpawnManager, Assembly-CSharp
+        m_MethodName: OnLevelUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

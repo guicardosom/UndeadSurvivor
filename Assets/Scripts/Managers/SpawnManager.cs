@@ -11,13 +11,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] public GameObject PlayerPrefab;
 
     public static SpawnManager Instance { get; private set; }
+    public GameObject Player { get; private set; }
     public GameVariables GameVariables;
     public int NumberOfEnemiesPerWave;
-    public GameObject Player { get; private set; }
 
     private List<BaseEnemy> wave;
 
-    void Awake()
+    #region Private Methods
+
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -29,8 +31,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-
-    void Update()
+    private void Update()
     {
         // If Number of Enemies in Wave is == 0 we up the Wave and go to the next one
         if(wave.Count == 0)
@@ -39,7 +40,8 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemies(WaveEnemyType.Zombie);
         }
     }
-
+    #endregion
+    #region Public Methods
     public void SpawnWaves()
     {
         
@@ -75,13 +77,14 @@ public class SpawnManager : MonoBehaviour
     {
         Player = Instantiate(PlayerPrefab);
     }
-
+    #endregion
+    #region Events
     public void OnLevelUp()
     {
         NumberOfEnemiesPerWave += GameVariables.PlayerLevel * 10;
     }
+    #endregion
 }
-
 
 public enum WaveEnemyType
 {

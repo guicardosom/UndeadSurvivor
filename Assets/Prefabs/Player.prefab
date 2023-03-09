@@ -171,6 +171,7 @@ MonoBehaviour:
   maxHealth: 150
   physicalResistance: 0
   gameVariables: {fileID: 11400000, guid: e9db0c2ff40e32747821966359143fbd, type: 2}
+  playerLevelUp: {fileID: 11400000, guid: 2c09d2b29b5f6564887c9040952e548c, type: 2}
 --- !u!114 &3807186937991170847
 MonoBehaviour:
   m_ObjectHideFlags: 0

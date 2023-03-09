@@ -16958,8 +16958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ff81c79591ac54280b70833ab84bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameVariables: {fileID: 0}
   PlayerPrefab: {fileID: 0}
+  GameVariables: {fileID: 0}
   NumberOfEnemiesPerWave: 0
 --- !u!1001 &3807186938313930869
 PrefabInstance:
@@ -17016,5 +17016,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3807186938309151858, guid: b51aa3eb6c4dd81458653f7e1caaffea, type: 3}
+      propertyPath: playerLevelUp
+      value: 
+      objectReference: {fileID: 11400000, guid: 2c09d2b29b5f6564887c9040952e548c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b51aa3eb6c4dd81458653f7e1caaffea, type: 3}

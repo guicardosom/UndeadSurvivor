@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
-public class DamageEventListener : MonoBehaviour
-{
+public class DamageEventListener : MonoBehaviour 
+{ 
     public DamageEvent gameEvent;
     public UnityEvent<Damage> onEventTriggered;
 

@@ -12,12 +12,13 @@ public class PlayerStats : MonoBehaviour
     [SerializeField, Range(0.0f, 0.9f)] private float physicalResistance;
     //[SerializeField, Range(0.0f, 0.9f)] private float magicResistance;
     //[SerializeField, Range(0.0f, 0.9f)] private float poisonResistance;
-    
-    public GameVariables gameVariables;
-    
+     
     private float experience;
     private float experienceToNextLevel;
     private int level;
+
+    public GameVariables gameVariables;
+    public EventTrigger playerLevelUp;
 
     #region Private Methods
     private void Awake()
@@ -32,16 +33,17 @@ public class PlayerStats : MonoBehaviour
     {
 
     }
-
     private void IncreaseLevel()
     {
         level++;
         gameVariables.IncreaveLevel();
 
         // Scale and modify Stats as we see fit when level up;
-        experienceToNextLevel += (experienceToNextLevel*level/10); // TODO: Come up with a better increase than this
-    }
+        experienceToNextLevel += (experienceToNextLevel * level / 10); // TODO: Come up with a better increase than this
 
+        // Trigger Event
+        playerLevelUp.TriggerEvent();
+    }
     #endregion
     #region Public Methods
     public void AddHealth(float health)
@@ -87,5 +89,9 @@ public class PlayerStats : MonoBehaviour
             IncreaseLevel();
         }
     }
+    #endregion
+    #region Events
+    
+
     #endregion
 }

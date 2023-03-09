@@ -47,6 +47,11 @@ public class BaseEnemy : MonoBehaviour
     public virtual void TakeDamage(Damage damage) // In the future we can implement Damage obj that has types where some enemies might be imune to
     {
         health -= damage.value;
+
+        if(health <= 0) 
+        {
+            Die();
+        }
     }
     
     public virtual Damage Attack()
@@ -69,6 +74,16 @@ public class BaseEnemy : MonoBehaviour
     protected bool IsInAttackRange()
     {
         return Vector3.Distance(transform.position, target.transform.position) < attackRange;
+    }
+
+    protected void Die()
+    {
+        // Drop EXP
+        Exp instance = Resources.Load("Exp", typeof(GameObject)) as Exp;
+        instance.ExperienceValue = experienceValue;
+        Instantiate(instance, this.transform);
+
+        Destroy(this);
     }
     #endregion
 
